@@ -1,14 +1,14 @@
 To clone and use:
 
-git clone [repo key]
+$ git clone https://github.com/jlangdev/agency-uf-api.git
 
-git checkout -b [name_of_your_working_branch]
+$ git checkout -b [name_of_your_working_branch]
 
-git pull origin master
+$ git pull origin master
 
-npm install
+$ npm install
 
-npm run start
+$ npm run start
 
 agency-uf-api listening on port:4001
 
