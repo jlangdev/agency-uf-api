@@ -1,6 +1,6 @@
 To clone and use:
 
-git clone [repo key]
+git clone https://github.com/jlangdev/agency-uf-api.git
 
 git checkout -b [name_of_your_working_branch]
 
