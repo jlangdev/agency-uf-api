@@ -1,0 +1,22 @@
+{
+  "name": "agency-uf-api",
+  "version": "1.0.0",
+  "description": "API for managing agency operations",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
+  },
+  "author": "Josh Lang",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^2.2.2",
+    "dotenv": "^6.0.0",
+    "koa": "^2.5.2",
+    "koa-body": "^4.0.4",
+    "koa-compose": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "mongodb": "^3.1.4",
+    "mongoose": "^5.2.12"
+  }
+}
