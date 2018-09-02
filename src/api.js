@@ -1,5 +1,5 @@
 "use strict";
-
+const db = require('./db/db.js')
 const Koa = require('koa');
 const Router = require('koa-router');
 const cors = require('@koa/cors');

@@ -1,20 +1,18 @@
 "use strict";
 
 const Router = require('koa-router')
-const User = require('./schema.js')
+const Student = require('./schema.js')
 const router = new Router();
 
-router.get('/users', async (ctx) => {
+router.get('/students', async (ctx) => {
     try {
-        let response = await queryAll(User)
+        let response = await queryAll(Student)
         ctx.body = response;
         ctx.status = 200;
 
-
-
     } catch (err) {
         ctx.status = 500;
-        ctx.message = "Error finding users"
+        ctx.message = "Error finding students"
     }
 })
 
