@@ -8,6 +8,8 @@ $ git pull origin master
 
 $ npm install
 
+add a file to root directory called '.env' then holler at me on slack to get the vars to put in there
+
 $ npm run start
 
 agency-uf-api listening on port:4001
