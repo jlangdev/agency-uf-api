@@ -13,7 +13,15 @@ $ npm run start
 agency-uf-api listening on port:4001
 
 
+Tech stack docs:
 
-To add new routes:
-    use src/resources/v1/_base to model routes and schema
-    add the route to index js imports and routeChain parameter array
+[server environment] Node :
+https://nodejs.org/en/docs/
+
+[application framework] Express
+
+[database] MongoDB:
+https://docs.mongodb.com/
+
+[db services]: Mongoose:
+https://mongoosejs.com/docs/index.html

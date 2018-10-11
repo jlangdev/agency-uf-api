@@ -34,5 +34,5 @@ var studentsSchema = new Schema({
 	project_assignments: [String]
 });
 
-var Student = mongoose.model('Students', studentsSchema);
+var Student = mongoose.model('students', studentsSchema,'students');
 module.exports = Student;
