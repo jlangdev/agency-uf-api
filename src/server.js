@@ -5,6 +5,8 @@ const path = require('path'),
     mongoose = require('mongoose'),
     express = require('express'),
     students = require('./resources/students/students.js'),
+    users = require('./resources/users/users.js'),
+
     port = process.envPort || 4001,
     AGENCY_DB_URL = process.env.AGENCY_DB_URL;
 
@@ -19,6 +21,9 @@ const app = express();
 app.use(bodyParser.json());                         // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use('/students',students);
+
+//TODO: split auth routes into /auth /users
+app.use('/users', users);
 
 
 

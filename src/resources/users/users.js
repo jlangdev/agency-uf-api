@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('./schema.js');
 const bcrypt = require('bcrypt');
-BCRYPT_SALT_ROUNDS = process.env.BCRYPT_SALT_ROUNDS;
+const BCRYPT_SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS);
 
 
 router.post('/register', (req, res) => {
@@ -35,9 +35,9 @@ router.post('/login', (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
-    User.find(username)
+    User.find({username: username})
         .then(user => {
-            return bcrypt.compare(password, user.password);
+            return bcrypt.compare(password, user[0].password);
         })
         .then(passwordMatch => {
             if (!passwordMatch) {
@@ -47,7 +47,7 @@ router.post('/login', (req, res) => {
         })
         .catch(err => {
             console.log("Error authenticating user: ");
-            console.log(error);
+            console.log(err);
         })
 });
 
