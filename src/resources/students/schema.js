@@ -6,11 +6,11 @@ var studentsSchema = new Schema({
 	major: String,
 	personal_statement: String,
 	headshot: String,
-	pillar: [{
+	pillar: {
 		semester_joined: String,
 		semester_left: String,
 		title: String
-	}],
+	},
   positions: [String],
   email: [String],
 	phone: String,
@@ -34,5 +34,5 @@ var studentsSchema = new Schema({
 	project_assignments: [String]
 });
 
-var Student = mongoose.model('Students', studentsSchema);
+var Student = mongoose.model('students', studentsSchema,'students');
 module.exports = Student;
