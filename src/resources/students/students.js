@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Student = require('./schema.js');
+const csv = require('fast-csv');
 
 
 router.get('/', (req, res) => {
@@ -18,7 +19,7 @@ router.get('/', (req, res) => {
                 students: foundStudents
             });
         })
-    //if no filter parameters return all    
+        //if no filter parameters return all    
     } else {
         Student.find({}, (err, foundStudents) => {
             if (err) {
@@ -62,6 +63,35 @@ router.post('/', (req, res) => {
             msg: "Added to Project 100!"
         });
     });
+});
+
+router.post('/upload', (req, res) => {
+    console.log(req.body);
+    let upload = req.files.file;
+    let students = [];
+
+    csv
+        .fromString(upload.data.toString(), {
+            headers: true,
+            ignoreEmpty: true
+        })
+        .on('data', (data) => {
+            //data['_id'] = new mongoose.types.ObjectId();
+            students.push(data);
+        })
+        .on('end', () => {
+            Student.create(students, (err) => {
+                if (err) {
+                    res.status(500).json({
+                        err: err
+                    });
+                }
+                res.status(200).json({
+                    msg: `Added ${students.length} students to Project 100!`
+                });
+            })
+
+        })
 });
 
 router.put('/:id', function (req, res) {
