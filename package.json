@@ -10,17 +10,12 @@
   "author": "Josh Lang",
   "license": "ISC",
   "dependencies": {
-    "@koa/cors": "^2.2.2",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.4",
     "express-fileupload": "^1.0.0",
     "fast-csv": "^2.4.1",
-    "koa": "^2.5.2",
-    "koa-body": "^4.0.4",
-    "koa-compose": "^4.1.0",
-    "koa-router": "^7.4.0",
     "mongodb": "^3.1.8",
     "mongoose": "^5.2.12"
   }
