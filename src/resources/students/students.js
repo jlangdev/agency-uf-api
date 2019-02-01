@@ -4,7 +4,9 @@ const router = express.Router();
 const Student = require('./schema.js');
 const csv = require('fast-csv');
 
-
+/**
+ * Get Students
+ */
 router.get('/', (req, res) => {
     //check for filter parameters in query
     if (req.body) {
@@ -34,21 +36,6 @@ router.get('/', (req, res) => {
         });
     }
 });
-
-router.get('/', function (req, res) {
-    Student.find({}, (err, foundStudents) => {
-        if (err) {
-            res.status(500).json({
-                err: err
-            });
-            console.log(err)
-        }
-        res.status(200).json({
-            students: foundStudents
-        });
-    });
-});
-
 
 router.post('/', (req, res) => {
     console.log(req.body);

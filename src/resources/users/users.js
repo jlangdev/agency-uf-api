@@ -27,7 +27,7 @@ router.post('/register', (req, res) => {
                     msg: username + " successfully registered."
                 });
             });
-        })
+        });
 });
 
 
