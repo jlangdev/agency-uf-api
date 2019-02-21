@@ -3,6 +3,10 @@ const express = require('express');
 const router = express.Router();
 const Student = require('./schema.js');
 const csv = require('fast-csv');
+var multer = require('multer');
+
+var upload = multer({dest: 'tmp/csv/'});
+
 
 /**
  * Get Students
@@ -52,7 +56,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.post('/upload', (req, res) => {
+router.post('/upload', upload.single('file'),(req, res) => {
     console.log(req.body);
     let upload = req.files.file;
     let students = [];
