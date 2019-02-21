@@ -1,13 +1,11 @@
 "use strict";
-const express = require('express');
-const router = express.Router();
-const Student = require('./schema.js');
-const csv = require('fast-csv');
-const multer = require('multer');
-const upload = multer({ dest: 'tmp/csv/' });
-const fs = require('fs')
-const path = require('path')
-
+const express = require('express'),
+    router = express.Router(),
+    Student = require('./schema.js'),
+    csv = require('fast-csv'),
+    multer = require('multer'),
+    upload = multer({ dest: 'tmp/csv/' }),
+    fs = require('fs');
 
 /**
  * GET
@@ -47,7 +45,7 @@ router.get('/', (req, res) => {
 /**
  * POST
  * Route: /students/
- * TODO:
+ * TODO: Test and debug
  */
 router.post('/', (req, res) => {
     console.log(req.body);
@@ -110,7 +108,6 @@ router.post('/upload', upload.single('upload'), (req, res) => {
         //delete file after operations
         fs.unlinkSync(file);
 });
-
 
 /**
  * PATCH

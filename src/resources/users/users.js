@@ -1,10 +1,16 @@
-const express = require('express');
-const router = express.Router();
-const User = require('./schema.js');
-const bcrypt = require('bcrypt');
-const BCRYPT_SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS);
+const express = require('express'),
+    router = express.Router(),
+    User = require('./schema.js'),
+    bcrypt = require('bcrypt'),
+    BCRYPT_SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS);
 
-
+/**
+ * POST
+ * Route: /users/register
+ * TODO: debug and test
+ *      implement a check for USERNAME ALREADY TAKEN
+ *      implement logic for interpreting salted password in the request
+ */
 router.post('/register', (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -30,7 +36,11 @@ router.post('/register', (req, res) => {
         });
 });
 
-
+/**
+ * POST
+ * Route: /users/login
+ * TODO: debug and test
+ */
 router.post('/login', (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
