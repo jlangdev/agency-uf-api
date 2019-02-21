@@ -10,7 +10,9 @@ const path = require('path')
 
 
 /**
- * Get Students
+ * GET
+ * Route: /students/
+ * TODO: implement reliable filter function
  */
 router.get('/', (req, res) => {
     //check for filter parameters in query
@@ -42,6 +44,11 @@ router.get('/', (req, res) => {
     }
 });
 
+/**
+ * POST
+ * Route: /students/
+ * TODO:
+ */
 router.post('/', (req, res) => {
     console.log(req.body);
     var student = new Student(req.body);
@@ -57,7 +64,11 @@ router.post('/', (req, res) => {
     });
 });
 
-//TO_DO: Nested DB objects
+/**
+ * POST
+ * Route: /students/upload
+ * TODO: implement loigic for nested properties in csv
+ */
 router.post('/upload', upload.single('upload'), (req, res) => {
     let file = req.file.path;
     let data = fs.readFileSync(file, 'utf-8')
@@ -101,8 +112,13 @@ router.post('/upload', upload.single('upload'), (req, res) => {
 });
 
 
-
-router.put('/:id', function (req, res) {
+/**
+ * PATCH
+ * Route: /students/:id
+ * TODO: debug and implement update logic so only specified fields are updated
+ * BUGS: document is completely replaced by req.body
+ */
+router.patch('/:id', function (req, res) {
     Student.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, oldStudent) {
         if (err) {
             res.status(500).json({
@@ -115,6 +131,12 @@ router.put('/:id', function (req, res) {
     });
 });
 
+/**
+ * DELETE
+ * Route: /students/:id
+ * TODO: debug and implement necessary logic
+ * BUGS: This route hasn't really been tested as of yet
+ */
 router.delete('/:id', function (req, res) {
     Student.findOneAndRemove({ _id: req.params.id }, function (err, deletedStudent) {
         if (err) {
