@@ -3,9 +3,10 @@ const express = require('express');
 const router = express.Router();
 const Student = require('./schema.js');
 const csv = require('fast-csv');
-var multer = require('multer');
-
-var upload = multer({dest: 'tmp/csv/'});
+const multer = require('multer');
+const upload = multer({ dest: 'tmp/csv/' });
+const fs = require('fs')
+const path = require('path')
 
 
 /**
@@ -56,13 +57,25 @@ router.post('/', (req, res) => {
     });
 });
 
-router.post('/upload', upload.single('file'),(req, res) => {
-    console.log(req.body);
-    let upload = req.files.file;
-    let students = [];
+router.post('/upload', upload.single('upload'), (req, res) => {
+    let file = req.file.path;
+    let data;
+    fs.readFile(file, 'utf-8', (err,result) => {
+        if (err) {
+            throw err;
+        } else {
+            data = result;
+            uploadCSV(data);
+        }
+    });
 
+    
+});
+
+function uploadCSV(data){
+    let students = [];
     csv
-        .fromString(upload.data.toString(), {
+        .fromString(data.toString(), {
             headers: true,
             ignoreEmpty: true
         })
@@ -83,7 +96,9 @@ router.post('/upload', upload.single('file'),(req, res) => {
             })
 
         })
-});
+}
+
+
 
 router.put('/:id', function (req, res) {
     Student.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, oldStudent) {
