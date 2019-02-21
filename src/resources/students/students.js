@@ -9,7 +9,7 @@ const csv = require('fast-csv');
  */
 router.get('/', (req, res) => {
     //check for filter parameters in query
-    if (req.body) {
+    if (req.body.filter) {
         Student.find(req.body, (err, foundStudents) => {
             if (err) {
                 res.status(500).json({
