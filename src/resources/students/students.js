@@ -57,33 +57,33 @@ router.post('/', (req, res) => {
     });
 });
 
+//TO_DO: Nested DB objects
 router.post('/upload', upload.single('upload'), (req, res) => {
     let file = req.file.path;
-    let data;
-    fs.readFile(file, 'utf-8', (err,result) => {
-        if (err) {
-            throw err;
-        } else {
-            data = result;
-            uploadCSV(data);
-        }
-    });
-
-    
-});
-
-function uploadCSV(data){
+    let data = fs.readFileSync(file, 'utf-8')
     let students = [];
+
     csv
         .fromString(data.toString(), {
             headers: true,
-            ignoreEmpty: true
+            ignoreEmpty: true,
+            delimiter: ','
         })
         .on('data', (data) => {
             //data['_id'] = new mongoose.types.ObjectId();
             students.push(data);
         })
         .on('end', () => {
+            for(let x of students){
+                for(let prop in x){
+                    let val = x[prop].toLowerCase();
+                    if(val == 'true'){
+                        x[prop] = true;
+                    }else if(val == 'false'){
+                        x[prop] = false
+                    }
+                }
+            }
             Student.create(students, (err) => {
                 if (err) {
                     res.status(500).json({
@@ -96,7 +96,9 @@ function uploadCSV(data){
             })
 
         })
-}
+        //delete file after operations
+        fs.unlinkSync(file);
+});
 
 
 
