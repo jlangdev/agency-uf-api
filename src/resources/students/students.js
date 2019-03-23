@@ -10,24 +10,9 @@ const express = require('express'),
 /**
  * GET
  * Route: /students/
- * TODO: implement reliable filter function
+ * TODO: Test and debug
  */
 router.get('/', (req, res) => {
-    //check for filter parameters in query
-    if (req.body.filter) {
-        Student.find(req.body, (err, foundStudents) => {
-            if (err) {
-                res.status(500).json({
-                    err: err
-                });
-                console.log(err)
-            }
-            res.status(200).json({
-                students: foundStudents
-            });
-        })
-        //if no filter parameters return all    
-    } else {
         Student.find({}, (err, foundStudents) => {
             if (err) {
                 res.status(500).json({
@@ -39,7 +24,6 @@ router.get('/', (req, res) => {
                 students: foundStudents
             });
         });
-    }
 });
 
 /**
